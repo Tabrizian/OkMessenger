@@ -6,9 +6,19 @@
 <?php
     $m = new MongoClient();
     echo "Connection to database Successfuly.";
-    $db = $m->new;
+    $people = $m->people;
+    $people_collection = $people->createCollection(
+        "people",
+        array(
+            'capped' => true,
+            'size' => 10*1024,
+            'max' => 10
+        )
+    );
 
-    echo phpinfo();
+    $insert = array("level"=>"Warn");
+    $people_collection->insert($insert);
+
     echo "New database new selected.";
 ?>
 </body>
