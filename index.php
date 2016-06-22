@@ -8,6 +8,7 @@
     echo "Connection to database Successfuly.";
     $db = $m->new;
 
+    echo phpinfo();
     echo "New database new selected.";
 ?>
 </body>
