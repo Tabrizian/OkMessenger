@@ -5,19 +5,23 @@ require_once(LIB_PATH.DS.'database.php');
 class DatabaseObject {
 
     public static function find_all() {
-        return static::find_by_sql("SELECT * FROM ".static::$table_name);
+        return static::find_by_sql("SELECT * FROM " . static::$table_name);
     }
 
     public static function find_by_id($id = 0) {
         global $database;
-        $result_array = static::find_by_sql("SELECT * FROM ".static::$table_name." WHERE
+
+        $result_array = static::find_by_sql("SELECT * FROM ".
+            static::$table_name ." WHERE
             id={$database->escape_value($id)} LIMIT 1");
+
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 
 
-    public static function find_by_sql($sql="") {
+    public static function find_by_sql($sql = "") {
         global $database;
+
         $result_set = $database->query($sql);
         $object_array = array();
 
@@ -29,7 +33,9 @@ class DatabaseObject {
     }
     protected function sanitized_attributes() {
         global $database;
+
         $clean_attributes = array();
+
         foreach($this->attributes() as $key => $value) {
             $clean_attributes[$key] = $database->escape_value($value);
         }
@@ -74,12 +80,14 @@ class DatabaseObject {
 
     public function create() {
         global $database;
+
         $attributes = $this->sanitized_attributes();
         $sql  = "INSERT INTO ". static::$table_name . "(";
         $sql .= join(", ", array_keys($attributes));
         $sql .= ") VALUES ('";
         $sql .= join("', '", array_values($attributes));
         $sql .= "')";
+
         if($database->query($sql)) {
             $this->id = $database->inserted_id();
             return true;
@@ -90,6 +98,7 @@ class DatabaseObject {
 
     public function update() {
         global $database;
+
         $attributes = $this->sanitized_attributes();
         $attributes_pairs = array();
         foreach($attributes as $key => $value) {
@@ -107,6 +116,7 @@ class DatabaseObject {
 
     public function delete() {
         global $database;
+
         $sql  = "DELETE FROM " . static::$table_name ;
         $sql .= " WHERE id=". $database->escape_value($this->id);
         $sql .= " LIMIT 1";
