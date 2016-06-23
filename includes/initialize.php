@@ -4,7 +4,7 @@ defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
 defined('SITE_ROOT') ? null :
     define('SITE_ROOT', DS . 'var' . DS . 'www' . DS . 'html' . DS .
-    'okmessenger');
+    'OkMessenger');
 
 defined('LIB_PATH') ? null : define('LIB_PATH', SITE_ROOT.DS.'includes');
 
