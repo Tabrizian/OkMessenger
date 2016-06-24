@@ -78,7 +78,7 @@ class DatabaseObject {
         return $attributes;
     }
 
-    public function create() {
+    public function insert() {
         global $database;
 
         $attributes = $this->sanitized_attributes();

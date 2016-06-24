@@ -14,7 +14,7 @@ class MongoDatabase {
 
     public function open_connection() {
         $connection = new MongoClient();
-        $my_db = $connection->connection->DB_NAME;
+        $this->my_db = $connection->DB_NAME;
         if(!$this->connection) {
             die("Database connection failed");
         }
@@ -22,14 +22,14 @@ class MongoDatabase {
 
     public function close_connection() {
         if(isset($this->connection)) {
-            mysqli_close($this->connection);
+            $this->connection.$this->close_connection();
             unset($this->connection);
             unset($my_db);
         }
     }
 
 }
-$client = new MongoClient();
+$client = new MongoDatabase();
 $database = $client->my_db;
 $db = &$database;
 ?>
