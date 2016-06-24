@@ -1,4 +1,4 @@
+<p class="footer"><?php echo "OkMessenger Allrights Reserved"?></p>
         </div>
-        <?php echo "OkMessenger Allrights Reserved"?>
     </body>
 </html>
