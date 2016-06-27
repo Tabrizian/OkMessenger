@@ -6,7 +6,7 @@ class User extends DatabaseObject
 {
 
     protected static $collection_name = "users";
-    protected static $fields = array('id' , 'first_name', 'last_name',
+    protected static $fields = array('id', 'first_name', 'last_name',
         'email_address', 'friends');
 
     public $id;
@@ -14,7 +14,6 @@ class User extends DatabaseObject
     public $last_name;
     public $email_address;
     public $friends;
-
 }
 
 ?>

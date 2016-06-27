@@ -1,5 +1,8 @@
 <?php
 require_once("../includes/initialize.php");
-$user = User::find_all()[0];
-echo $user->id;
+$user = new User();
+$user->id = 2;
+$user->first_name = "Iman";
+$user->last_name = "Ahmad";
+$user->insert();
 ?>

@@ -2,21 +2,15 @@
 
 require_once(LIB_PATH.DS.'database.php');
 
-class DatabaseObject {
+class DatabaseObject implements JsonSerializable{
 
     public static function find_all() {
-        global $database;
-
-        $collection = static::$collection_name;
         $result_set = static::find_by_sql();
 
         return $result_set;
     }
 
     public static function find_by_id($id = 0) {
-        global $database;
-
-
         $query = array("id" => $id);
 
         $result_array = find_by_sql($query);
@@ -78,19 +72,14 @@ class DatabaseObject {
     public function insert() {
         global $database;
 
-        $attributes = $this->sanitized_attributes();
-        $sql  = "INSERT INTO ". static::$table_name . "(";
-        $sql .= join(", ", array_keys($attributes));
-        $sql .= ") VALUES ('";
-        $sql .= join("', '", array_values($attributes));
-        $sql .= "')";
+        $collection = static::$collection_name;
+        $result = $database->$collection->insert($this);
 
-        if($database->query($sql)) {
-            $this->id = $database->inserted_id();
+        if($result)
             return true;
-        } else {
+        else
             return false;
-        }
+
     }
 
     public function update() {
@@ -125,4 +114,14 @@ class DatabaseObject {
         }
     }
 
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize() {
+        return $this->attributes();
+    }
 }
