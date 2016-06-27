@@ -13,11 +13,12 @@ class MongoDatabase {
     }
 
     public function open_connection() {
-        $connection = new MongoClient();
-        $this->my_db = $connection->DB_NAME;
-        if(!$this->connection) {
+        $this->connection = new MongoClient();
+        $this->my_db = $this->connection->selectDB(DB_NAME);
+        if(!$this->connection->connected) {
             die("Database connection failed");
         }
+
     }
 
     public function close_connection() {

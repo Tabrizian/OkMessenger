@@ -5,7 +5,11 @@ require_once(LIB_PATH.DS.'database.php');
 class DatabaseObject {
 
     public static function find_all() {
-        return static::find_by_sql("SELECT * FROM " . static::$table_name);
+        global $database;
+
+        $collection = static::$collection_name;
+        $cursor = $database->$collection->find();
+        return var_dump(iterator_to_array($cursor));
     }
 
     public static function find_by_id($id = 0) {
