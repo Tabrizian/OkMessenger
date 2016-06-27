@@ -8,7 +8,7 @@ class DatabaseObject {
         global $database;
 
         $collection = static::$collection_name;
-        $result_set = find_by_sql();
+        $result_set = static::find_by_sql();
 
         return $result_set;
     }
@@ -33,7 +33,7 @@ class DatabaseObject {
         $result_set = $database->$collection->find($sql);
         $object_array = array();
 
-        while($row = $result_set->next) {
+        while($row = $result_set->next()) {
             $object_array[] = static::instantiate($row);
         }
 
@@ -66,7 +66,7 @@ class DatabaseObject {
 
     protected function attributes() {
         $attributes = array();
-        foreach(static::$db_fields as $field) {
+        foreach(static::$fields as $field) {
             if(property_exists($this, $field)) {
                 $attributes[$field] = $this->$field;
             }
