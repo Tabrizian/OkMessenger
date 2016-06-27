@@ -8,43 +8,36 @@ class DatabaseObject {
         global $database;
 
         $collection = static::$collection_name;
-        $cursor = $database->$collection->find();
-        return var_dump(iterator_to_array($cursor));
+        $result_set = static::find_by_sql();
+
+        return $result_set;
     }
 
     public static function find_by_id($id = 0) {
         global $database;
 
-        $result_array = static::find_by_sql("SELECT * FROM ".
-            static::$table_name ." WHERE
-            id={$database->escape_value($id)} LIMIT 1");
+
+        $query = array("id" => $id);
+
+        $result_array = find_by_sql($query);
 
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 
 
-    public static function find_by_sql($sql = "") {
+    public static function find_by_sql($sql = array()) {
         global $database;
 
-        $result_set = $database->query($sql);
+        $collection = static::$collection_name;
+
+        $result_set = $database->$collection->find($sql);
         $object_array = array();
 
-        while($row = $database->fetch_array($result_set)) {
+        while($row = $result_set->next()) {
             $object_array[] = static::instantiate($row);
         }
 
         return $object_array;
-    }
-    protected function sanitized_attributes() {
-        global $database;
-
-        $clean_attributes = array();
-
-        foreach($this->attributes() as $key => $value) {
-            $clean_attributes[$key] = $database->escape_value($value);
-        }
-
-        return $clean_attributes;
     }
 
     public function save() {
@@ -73,7 +66,7 @@ class DatabaseObject {
 
     protected function attributes() {
         $attributes = array();
-        foreach(static::$db_fields as $field) {
+        foreach(static::$fields as $field) {
             if(property_exists($this, $field)) {
                 $attributes[$field] = $this->$field;
             }
