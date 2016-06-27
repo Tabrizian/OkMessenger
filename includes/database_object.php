@@ -8,7 +8,8 @@ class DatabaseObject {
         global $database;
 
         $collection = static::$collection_name;
-        return $database->$collection->find();
+        $cursor = $database->$collection->find();
+        return var_dump(iterator_to_array($cursor));
     }
 
     public static function find_by_id($id = 0) {
