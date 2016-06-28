@@ -95,15 +95,17 @@ class DatabaseObject implements JsonSerializable{
     public function delete() {
         global $database;
 
-        $sql  = "DELETE FROM " . static::$table_name ;
-        $sql .= " WHERE id=". $database->escape_value($this->id);
-        $sql .= " LIMIT 1";
+        $query = ["id" => $this->id];
+        $collection = static::$collection_name;
 
-        if($database->query($sql)) {
+        $status = $database->$collection->remove($query, array("justOne" => true));
+
+        if($status == 1) {
             return true;
         } else {
             return false;
         }
+
     }
 
     /**
