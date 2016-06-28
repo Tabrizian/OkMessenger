@@ -85,19 +85,11 @@ class DatabaseObject implements JsonSerializable{
     public function update() {
         global $database;
 
-        $attributes = $this->sanitized_attributes();
-        $attributes_pairs = array();
-        foreach($attributes as $key => $value) {
-            $attributes_pairs[] = "{$key}='{$value}'";
-        }
-        $sql  = "UPDATE ". static::$table_name . " SET ";
-        $sql .= join(", ", $attributes_pairs);
-        $sql .= " WHERE id=". $database->escape_value($this->id);
-        if($database->query($sql)) {
-            return true;
-        } else {
-            return false;
-        }
+        $collection = static::$collection_name;
+        $query = ["id" => $this->id];
+        $attributes = $this->attributes();
+
+        $database->$collection->findAndModify($query, $attributes);
     }
 
     public function delete() {
