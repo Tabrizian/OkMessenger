@@ -6,18 +6,25 @@ class User extends DatabaseObject
 {
 
     protected static $collection_name = "users";
-    protected static $fields = array('id', 'first_name', 'last_name',
-        'email_address', 'friends');
-
-    public $id;
+    protected static $fields = array('first_name', 'last_name',
+        'email_address', 'birthday', 'username', 'password', 'sex', 'friends');
+    
+    
     public $first_name;
     public $last_name;
     public $email_address;
-    public $birth_day;
-    public $friends;
+    public $birthday;
     public $username;
     public $password;
     public $sex;
+    public $friends;
+
+    public static function authenticate($username, $password)
+    {
+        $found_user = self::find_by_sql(array("username" => $username, "password" => $password));
+
+        return !empty($found_user) ? array_shift($found_user) : false;
+    }
 }
 
 ?>

@@ -10,8 +10,8 @@ class DatabaseObject implements JsonSerializable{
         return $result_set;
     }
 
-    public static function find_by_id($id = 0) {
-        $query = array("id" => $id);
+    public static function find_by_username($username = 0) {
+        $query = array("username" => $username);
 
         $result_array = find_by_sql($query);
 
@@ -86,7 +86,7 @@ class DatabaseObject implements JsonSerializable{
         global $database;
 
         $collection = static::$collection_name;
-        $query = ["id" => $this->id];
+        $query = ["username" => $this->username];
         $attributes = $this->attributes();
 
         $database->$collection->findAndModify($query, $attributes);
@@ -95,7 +95,7 @@ class DatabaseObject implements JsonSerializable{
     public function delete() {
         global $database;
 
-        $query = ["id" => $this->id];
+        $query = ["username" => $this->username];
         $collection = static::$collection_name;
 
         $status = $database->$collection->remove($query, array("justOne" => true));

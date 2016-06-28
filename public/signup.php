@@ -1,5 +1,6 @@
 <?php require_once('../includes/initialize.php'); ?>
 <?php
+
 if (isset($_POST['submit'])) {
     $user = new User();
     $user->first_name = $_POST['first_name'];
@@ -12,6 +13,7 @@ if (isset($_POST['submit'])) {
 
     if ($user->insert()) {
         echo "Signup success!";
+        redirect_to("login.php");
     } else {
         echo "Signup failed!";
     }
