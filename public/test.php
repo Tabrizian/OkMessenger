@@ -1,8 +1,8 @@
 <?php
 require_once("../includes/initialize.php");
 $user = new User();
-$user->id = 2;
-$user->first_name = "Iman";
+$user->id = 1;
+$user->first_name = "Amin";
 $user->last_name = "Ahmad";
-$user->insert();
+$user->update();
 ?>
