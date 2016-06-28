@@ -13,7 +13,11 @@ class User extends DatabaseObject
     public $first_name;
     public $last_name;
     public $email_address;
+    public $birth_day;
     public $friends;
+    public $username;
+    public $password;
+    public $sex;
 }
 
 ?>

@@ -1,22 +1,36 @@
 <?php require_once('../includes/initialize.php'); ?>
+<?php
+    if(isset($_POST['submit'])) {
+        $user = new User();
+        $user->first_name = $_POST['first_name'];
+        $user->last_name = $_POST['last_name'];
+        $user->email_address = $_POST['email_address'];
+        $user->birth_day = strtotime($_POST['year'] + "/" + $_POST['month'] + "/" + $_POST['day']);
+        $user->username = $_POST['username'];
+        $user->password = $_POST['password'];
+        $user->sex = $_POST['sex'];
+
+        $user->insert();
+    }
+?>
 <?php include_layout_template('login-header.php'); ?>
     <div class="container-fluid" >
         <div class="row">
             <div class="col-md-4 col-md-offset-4  well well-sm">
                 <legend><a href=#><i class="glyphicon glyphicon-globe"></i></a> Sign up!</legend>
-                <form action="#" method="post" class="form" >
+                <form action="signup.php" method="post" class="form">
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control" name="firstname" placeholder="First Name" type="text"
+                            <input class="form-control" name="first_name" placeholder="First Name" type="text"
                                    required autofocus />
                         </div>
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control" name="lastname" placeholder="Last Name" type="text" required />
+                            <input class="form-control" name="last_name" placeholder="Last Name" type="text" required />
                         </div>
                     </div>
                     <input class="form-control" name="username" placeholder="User Name" type="text" />
                     <input class="form-control" name="password" placeholder="Password" type="password" />
-                    <input class="form-control" name="email" placeholder="Email" type="email" />
+                    <input class="form-control" name="email_address" placeholder="Email" type="email" />
                     <label for="">
                         Birth Date</label>
                     <div class="row">
