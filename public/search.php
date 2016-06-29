@@ -5,7 +5,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <div class="col-xs-12 col-sm-offset-3 col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading c-list">
                     <span class="title">Users</span>
