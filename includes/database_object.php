@@ -1,6 +1,6 @@
 <?php
 
-require_once(LIB_PATH.DS.'database.php');
+require_once(LIB_PATH . DS .'database.php');
 
 class DatabaseObject implements JsonSerializable{
 
@@ -10,8 +10,8 @@ class DatabaseObject implements JsonSerializable{
         return $result_set;
     }
 
-    public static function find_by_username($username = 0) {
-        $query = array("username" => $username);
+    public static function find_by_id($_id = 0) {
+        $query = array("_id" => $_id);
 
         $result_array = find_by_sql($query);
 
@@ -86,16 +86,16 @@ class DatabaseObject implements JsonSerializable{
         global $database;
 
         $collection = static::$collection_name;
-        $query = ["username" => $this->username];
+        $query = ["_id" => $this->_id];
         $attributes = $this->attributes();
-
+        unset($attributes['_id']);
         $database->$collection->findAndModify($query, $attributes);
     }
 
     public function delete() {
         global $database;
 
-        $query = ["username" => $this->username];
+        $query = ["_id" => $this->_id];
         $collection = static::$collection_name;
 
         $status = $database->$collection->remove($query, array("justOne" => true));
@@ -116,6 +116,8 @@ class DatabaseObject implements JsonSerializable{
      * @since 5.4.0
      */
     function jsonSerialize() {
+        $attributes = $this->attributes();
+        unset($attributes['_id']);
         return $this->attributes();
     }
 }

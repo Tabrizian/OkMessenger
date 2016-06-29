@@ -6,9 +6,9 @@ class Message extends DatabaseObject
 {
 
     protected static $collection_name = "messages";
-    protected static $fields = array('id', 'text', 'from_user');
+    protected static $fields = array('_id', 'text', 'from_user');
 
-    public $id;
+    public $_id;
     public $text;
     public $from_user;
 }
