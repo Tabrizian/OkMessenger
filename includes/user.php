@@ -7,7 +7,7 @@ class User extends DatabaseObject implements JsonSerializable
 
     protected static $collection_name = "users";
     protected static $fields = array('_id', 'first_name', 'last_name',
-        'email_address', 'birthday', 'username', 'password', 'sex', 'friends');
+        'email_address', 'birthday', 'username', 'password', 'sex', 'friends', 'image');
     
     
     public $_id;
@@ -19,6 +19,9 @@ class User extends DatabaseObject implements JsonSerializable
     public $password;
     public $sex;
     public $friends;
+    public $image;
+    public $bio;
+    public $address;
 
     public static function authenticate($username, $password)
     {
