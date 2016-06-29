@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
 
     if($found_user) {
         $session->login($found_user);
-        echo "Success!";
+        redirect_to("index.php");
     }
 }
 ?>

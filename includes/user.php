@@ -26,6 +26,10 @@ class User extends DatabaseObject implements JsonSerializable
 
         return !empty($found_user) ? array_shift($found_user) : false;
     }
+    
+    public function full_name() {
+        return $this->first_name . " " . $this->last_name;
+    }
 }
 
 ?>
