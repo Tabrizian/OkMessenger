@@ -13,7 +13,7 @@ class DatabaseObject implements JsonSerializable{
     public static function find_by_id($_id = 0) {
         $query = array("_id" => $_id);
 
-        $result_array = find_by_sql($query);
+        $result_array = self::find_by_sql($query);
 
         return !empty($result_array) ? array_shift($result_array) : false;
     }
@@ -22,7 +22,7 @@ class DatabaseObject implements JsonSerializable{
     public static function find_by_sql($sql = array()) {
         global $database;
 
-        $collection = static::$collection_name;
+        $collection = static::  $collection_name;
 
         $result_set = $database->$collection->find($sql);
         $object_array = array();
@@ -73,7 +73,7 @@ class DatabaseObject implements JsonSerializable{
         global $database;
 
         $collection = static::$collection_name;
-        $result = $database->$collection->insert($this);
+        $result = $database->$collection->insert($this->jsonSerialize());
 
         if($result)
             return true;
@@ -118,6 +118,9 @@ class DatabaseObject implements JsonSerializable{
     function jsonSerialize() {
         $attributes = $this->attributes();
         unset($attributes['_id']);
-        return $this->attributes();
+
+        log_action("What what");
+
+        return $attributes;
     }
 }

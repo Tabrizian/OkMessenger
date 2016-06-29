@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     $user->sex = $_POST['sex'];
 
     
-    if(User::find_by_username(us))
+    
     if ($user->insert()) {
         echo "Signup success!";
         redirect_to("login.php");

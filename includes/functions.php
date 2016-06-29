@@ -10,6 +10,17 @@ function redirect_to($location = NULL) {
 function include_layout_template($template="") {
     include(SITE_ROOT . DS . 'public' . DS . 'layouts' . DS . $template);
 }
+function log_action($action, $message="") {
+    $filename = SITE_ROOT . DS . 'logs' . DS .'log.txt';
+    if($handle = fopen($filename, 'a')) {
+        $content = strftime('%Y/%m/%d %H:%M:%S')." | ".$action.' : '
+            .$message ."\n";
+        fwrite($handle ,$content);
+        fclose($handle);
+    } else {
+        echo "Can't open file logs/log.txt";
+    }
+}
 
 function __autoload($class_name) {
     $class_name = strtolower($class_name);
