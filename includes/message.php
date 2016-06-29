@@ -16,7 +16,7 @@ class Message extends DatabaseObject
 
     public function output_message()
     {
-        $str = "<span class=\"label label-info\">" . User::find_by_id($this->from_user_id)->full_name() . "</span>&nbsp;&nbsp;<br/>";
+        $str = "<span class=\"label label-info\">" . User::find_by_id($this->from_user_id)->full_name() . "</span>&nbsp;&nbsp; $this->text<br/>";
 
         return $str;
     }

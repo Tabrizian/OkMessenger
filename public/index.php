@@ -1,6 +1,7 @@
 <?php
 require_once ('../includes/initialize.php');
 if(!$session->is_logged_in()) redirect_to("login.php");
+
 if(isset($_POST['send'])) {
     $message = new Message();
     $message->is_private = false;
@@ -9,7 +10,10 @@ if(isset($_POST['send'])) {
     $message->text = $_POST['message'];
 
     $message->insert();
+
+
 }
+$messages = Message::find_all();
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -107,7 +111,11 @@ if(isset($_POST['send'])) {
                         <div class="span12 well">
                             <div id="room_messages" style="min-height:220px; max-height:220px; overflow:auto;">
                                 <!-- Message -->
-                                <span class="label label-info">ServerBot</span>&nbsp;&nbsp;Welcome to the room :)<br/>
+                                <?php
+                                    foreach ($messages as $message_instance) {
+                                        echo $message_instance->output_message();
+                                    }
+                                ?>
                                 <!-- End Message -->
                             </div>
                         </div>
