@@ -23,4 +23,3 @@ function sendFunction(){
     document.getElementsByClassName("active-chat")[0].appendChild(node);
 
 };
-
