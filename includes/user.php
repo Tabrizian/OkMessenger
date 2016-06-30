@@ -2,7 +2,7 @@
 
 require_once(LIB_PATH . DS . 'database.php');
 
-class User extends DatabaseObject implements JsonSerializable
+class User extends DatabaseObject
 {
 
     protected static $collection_name = "users";

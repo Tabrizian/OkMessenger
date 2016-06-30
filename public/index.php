@@ -1,8 +1,9 @@
 <?php
-require_once ('../includes/initialize.php');
-if(!$session->is_logged_in()) redirect_to("login.php");
+require_once('../includes/initialize.php');
+if (!$session->is_logged_in()) redirect_to("login.php");
 
-if(isset($_POST['send'])) {
+if (isset($_POST['send'])) {
+
     $message = new Message();
     $message->is_private = false;
     $message->destruction_time = -1;
@@ -13,7 +14,10 @@ if(isset($_POST['send'])) {
 
 
 }
-$messages = Message::find_all();
+if (isset($_GET['id']) && isset($_GET['room_type'])) {
+    $messages = Message::find_all();
+}
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -112,9 +116,9 @@ $messages = Message::find_all();
                             <div id="room_messages" style="min-height:220px; max-height:220px; overflow:auto;">
                                 <!-- Message -->
                                 <?php
-                                    foreach ($messages as $message_instance) {
-                                        echo $message_instance->output_message();
-                                    }
+                                foreach ($messages as $message_instance) {
+                                    echo $message_instance->output_message();
+                                }
                                 ?>
                                 <!-- End Message -->
                             </div>
