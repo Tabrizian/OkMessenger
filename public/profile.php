@@ -100,13 +100,13 @@ $user = User::find_by_id($session->user_id);
                                     <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                                     <span id="text-login-msg">specify group info</span>
                                 </div>
-                                <input id="login_username" class="form-control" type="text" placeholder="group name " required>
-                                <input id="login_password" class="form-control" type="text" placeholder="group description" required>
+                                <input id="group_name" class="form-control" type="text" placeholder="Group name " required>
+                                <input id="group_description" class="form-control" type="text" placeholder="Group description" required>
 
                             </div>
                             <div class="modal-footer">
                                 <div>
-                                    <button type="submit" class=" btn btn-primary btn-block btn-lg" data-dismiss="modal" aria-label="Close">
+                                    <button type="submit" name="new_group" class=" btn btn-primary btn-block btn-lg" data-dismiss="modal" aria-label="Close">
                                         Create
                                     </button>
 
@@ -151,13 +151,13 @@ $user = User::find_by_id($session->user_id);
                                     <div id="icon-login-msg1" class="glyphicon glyphicon-chevron-right"></div>
                                     <span id="text-login-msg1">specify channel info</span>
                                 </div>
-                                <input id="login_username1" class="form-control" type="text" placeholder="channel name " required>
-                                <input id="login_password1" class="form-control" type="text" placeholder="channel description" required>
+                                <input id="login_username1" class="form-control" type="text" placeholder="Channel Name " required>
+                                <input id="login_password1" class="form-control" type="text" placeholder="Channel Description" required>
 
                             </div>
                             <div class="modal-footer">
                                 <div>
-                                    <button type="submit" class=" btn btn-primary btn-block btn-lg" data-dismiss="modal" aria-label="Close">
+                                    <button type="submit" class=" btn btn-primary btn-block btn-lg" data-dismiss="modal"  name="new_channel" aria-label="Close">
                                         Create
                                     </button>
 

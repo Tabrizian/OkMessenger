@@ -42,7 +42,7 @@ $user = User::find_by_id($session->user_id);
                             </tr>
                             <tr>
                                 <td>Home Address</td>
-                                <td><?php echo $user->home_address; ?></td>
+                                <td><?php echo $user->address; ?></td>
                             </tr>
                             <tr>
                                 <td>Email</td>

@@ -7,7 +7,7 @@ class User extends DatabaseObject
 
     protected static $collection_name = "users";
     protected static $fields = array('_id', 'first_name', 'last_name',
-        'email_address', 'birthday', 'username', 'password', 'sex', 'friends', 'image');
+        'email_address', 'birthday', 'username', 'password', 'sex', 'friends', 'image', 'bio', 'address', 'phone_number');
             
     
     public $_id;
@@ -22,6 +22,7 @@ class User extends DatabaseObject
     public $image;
     public $bio;
     public $address;
+    public $phone_number;
 
     public static function authenticate($username, $password)
     {
@@ -32,7 +33,7 @@ class User extends DatabaseObject
     
     public function full_name() {
         return $this->first_name . " " . $this->last_name;
-    }   
+    }
 }
 
 ?>
