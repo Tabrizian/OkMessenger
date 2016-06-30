@@ -31,7 +31,7 @@ $messages = Message::find_all();
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <style>
         body {
             padding-top: 10px;

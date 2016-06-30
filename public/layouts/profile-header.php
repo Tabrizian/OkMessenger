@@ -7,10 +7,14 @@
 
         <title>OkMessenger Login</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="css/okmessenger/profile.css" rel="stylesheet"/>
+        <script src="js/jquery-2.2.3.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/okmessenger/popup.css">
+
+
     </head>
     <body>
 
-    <div class="container-fluid">
+
 
