@@ -11,7 +11,7 @@ class DatabaseObject implements JsonSerializable{
     }
 
     public static function find_by_id($_id = 0) {
-        $query = array("_id" => $_id);
+        $query = array("_id" => new MongoId($_id));
 
         $result_array = self::find_by_sql($query);
 
@@ -73,7 +73,10 @@ class DatabaseObject implements JsonSerializable{
         global $database;
 
         $collection = static::$collection_name;
-        $result = $database->$collection->insert($this->jsonSerialize());
+        $to_be_inserted = $this->jsonSerialize();
+        $result = $database->$collection->insert($to_be_inserted);
+
+        $this->_id = $to_be_inserted['_id'];
 
         if($result)
             return true;

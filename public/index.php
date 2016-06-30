@@ -2,20 +2,29 @@
 require_once('../includes/initialize.php');
 if (!$session->is_logged_in()) redirect_to("login.php");
 $messages = array();
-if (isset($_POST['send'])) {
+$group = null;
+if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
-    $message = new Message();
-    $message->is_private = false;
-    $message->destruction_time = -1;
-    $message->from_user_id = $session->user_id;
-    $message->text = $_POST['message'];
+    $group = Group::find_by_id($_GET['id']);
+    log_action($group->name);
+    if($_GET['room_type'] == 'g' && isset($_POST['send'])) {
+        $message = new Message();
+        $message->is_private = false;
+        $message->destruction_time = -1;
+        $message->from_user_id = $session->user_id;
+        $message->text = $_POST['message'];
 
-    $message->insert();
+        $message->insert();
+        
+        
+        $group->messages[] = $message->_id;
+        $group->update();
+    }
 
 
 }
-if (isset($_GET['id']) && isset($_GET['room_type'])) {
-    $messages = Message::find_all();
+if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
+    $messages = Message::find_all_ids($group->messages);
 }
 
 ?>
@@ -147,7 +156,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
         <div class="span12">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <form class="navbar-form" action="index.php" method="post">
+                    <form class="navbar-form" action="index.php?room_type=g&id=577570792a284fb8128b4567" method="post">
                         <input id="message_text" type="text" name="message" class="span9" required autofocus>
                         <button id="b_send_message" type="submit" name="send" class="btn btn-primary">Send</button>
                     </form>

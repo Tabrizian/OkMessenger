@@ -8,7 +8,7 @@
 
 class Group extends DatabaseObject{
 
-    public static $fields = array('_id', 'name', 'description', 'picture', 'members', 'mentions', 'hash_tags', 'message_ids');
+    public static $fields = array('_id', 'name', 'description', 'picture', 'members', 'messages');
     public static $collection_name = "groups";
     public $_id;
     public $name;

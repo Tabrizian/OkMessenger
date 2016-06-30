@@ -21,6 +21,11 @@ class Message extends DatabaseObject
         return $str;
     }
 
+    public static function find_all_ids($ids = array()) {
+        $in_this_range = ['$in' => $ids];
+        $query = ['_id' => $in_this_range];
+        return self::find_by_sql($query);
+    }
 }
 
 ?>
