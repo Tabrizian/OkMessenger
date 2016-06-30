@@ -42,22 +42,20 @@ $user = User::find_by_id($session->user_id);
                             </tr>
                             <tr>
                                 <td>Home Address</td>
-                                <td>Tehran,Iran</td>
+                                <td><?php echo $user->home_address; ?></td>
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td><a href="mailto:tabrizian@outlook.com"><?php echo $user->email_address; ?></a></td>
+                                <td><a href="<?php echo $user->email_address; ?>"><?php echo $user->email_address; ?></a></td>
                             </tr>
                             <td>Phone Number</td>
-                            <td>+982122774661(Landline)<br>+989377371367(Mobile)
-                            </td>
+                            <td><?php echo $user->phone_number; ?></td>
 
                             </tr>
 
                             </tr>
                             <td>Biography</td>
-                            <td>I’m Iman Tabrizian studying computer software engineering at Amirkabir University of
-                                technology, Tehran, Iran.
+                            <td><?php echo $user->bio; ?>
                             </td>
 
                             </tr>

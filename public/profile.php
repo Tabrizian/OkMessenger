@@ -1,6 +1,10 @@
 <?php require_once('../includes/initialize.php'); ?>
 <?php if(!$session->is_logged_in()) redirect_to(); ?>
 <?php include_layout_template('profile-header.php'); ?>
+<?php
+$user = User::find_by_id($session->user_id);
+
+?>
 <div class="row">
 
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
@@ -9,7 +13,7 @@
         <div class="panel panel-info">
             <div class="panel-heading">
 
-                <h3 class="panel-title">Iman Tabrizian</h3>
+                <h3 class="panel-title"><?php echo $user->full_name(); ?></h3>
 
             </div>
         </div>
@@ -23,36 +27,36 @@
                         <tbody>
                         <tr>
                             <td>Username:</td>
-                            <td>@I_Tabrizian</td>
+                            <td>@<?php echo $user->username; ?></td>
                         </tr>
 
                         <tr>
                             <td>Date of Birth</td>
-                            <td>01/24/1996</td>
+                            <td><?php echo strftime('%D',$user->birthday); ?></td>
                         </tr>
 
                         <tr>
                         <tr>
                             <td>Gender</td>
-                            <td>Male</td>
+                            <td><?php echo $user->sex; ?></td>
                         </tr>
                         <tr>
                             <td>Home Address</td>
-                            <td>Tehran,Iran</td>
+                            <td><?php echo $user->address; ?></td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td><a href="mailto:tabrizian@outlook.com">tabrizian@outlook.com</a></td>
+                            <td><a href="<?php echo $user->email_address; ?>"><?php echo $user->email_address; ?></a></td>
                         </tr>
                         <td>Phone Number</td>
-                        <td>+982122774661(Landline)<br>+989377371367(Mobile)
+                        <td><?php echo $user->phone_number; ?>
                         </td>
 
                         </tr>
 
                         </tr>
                         <td>Biography</td>
-                        <td>I’m Iman Tabrizian studying computer software engineering at Amirkabir University of technology, Tehran, Iran.
+                        <td><?php echo $user->bio; ?>
                         </td>
 
                         </tr>

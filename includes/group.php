@@ -15,7 +15,5 @@ class Group extends DatabaseObject{
     public $description;
     public $picture;
     public $members;
-    public $mentions;
-    public $hash_tags;
-    public $message_ids;
+    public $messages;
 }
