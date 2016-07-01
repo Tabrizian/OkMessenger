@@ -178,7 +178,7 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
                     </div>
                 </div>
 
-            </div>
+            </div>  
 
 
         </div>

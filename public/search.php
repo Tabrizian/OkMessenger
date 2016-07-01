@@ -1,5 +1,11 @@
 <?php require_once('../includes/initialize.php'); ?>
-<?php include_layout_template('search-header.php'); ?>
+<?php
+if(!$session->is_logged_in()) redirect_to("login.php");
+$users = User::find_all();
+?>
+<?php
+include_layout_template('search-header.php');
+?>
 
 
 <div class="container">
@@ -27,69 +33,11 @@
                 </div>
 
                 <ul class="list-group" id="contact-list">
-                    <li class="list-group-item">
-                        <div class="col-xs-12 col-sm-3">
-                            <img src="https://avatars1.githubusercontent.com/u/10105175?v=3&s=400" alt="Scott Stevens" class="img-responsive img-circle" />
-                        </div>
-                        <div class="col-xs-12 col-sm-9">
-
-                            <span class="name">Iman Tabrizian</span><br/>
-                            <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="Tehran iran"></span>
-                            <span class="visible-xs"> <span class="text-muted">Tehran Iran</span><br/></span>
-                            <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="09371234567"></span>
-                            <span class="visible-xs"> <span class="text-muted">09371234567</span><br/></span>
-                            <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="iman.tabrizian@gmail.com"></span>
-                            <span class="visible-xs"> <span class="text-muted">iman.tabrizian@gmail.com</span><br/></span>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="col-xs-12 col-sm-3">
-                            <img src="https://avatars1.githubusercontent.com/u/11219480?v=3&s=400" alt="aliakbar" class="img-responsive img-circle" />
-                        </div>
-                        <div class="col-xs-12 col-sm-9">
-                            <span class="name">aliAkbar</span><br/>
-                            <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="Qom iran"></span>
-                            <span class="visible-xs"> <span class="text-muted">Qom Iran</span><br/></span>
-                            <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="09101234567"></span>
-                            <span class="visible-xs"> <span class="text-muted">09101234567</span><br/></span>
-                            <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="badri@example.com"></span>
-                            <span class="visible-xs"> <span class="text-muted">badri@example.com</span><br/></span>
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="col-xs-12 col-sm-3">
-                            <img src="https://avatars2.githubusercontent.com/u/11619295?v=3&s=400" alt="Emran Batman" class="img-responsive img-circle" />
-                        </div>
-                        <div class="col-xs-12 col-sm-9">
-                            <span class="name">Emran Batman</span><br/>
-                            <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="Tehran Iran"></span>
-                            <span class="visible-xs"> <span class="text-muted">Tehran Iran</span><br/></span>
-                            <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="09131234567"></span>
-                            <span class="visible-xs"> <span class="text-muted">09131234567</span><br/></span>
-                            <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="emran.batman@example.com"></span>
-                            <span class="visible-xs"> <span class="text-muted">emran.batman@example.com</span><br/></span>
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
-
-                    <li class="list-group-item">
-                        <div class="col-xs-12 col-sm-3">
-                            <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt="user4" class="img-responsive img-circle" />
-                        </div>
-                        <div class="col-xs-12 col-sm-9">
-                            <span class="name">user4</span><br/>
-                            <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="tehran Iran"></span>
-                            <span class="visible-xs"> <span class="text-muted">Tehran Iran</span><br/></span>
-                            <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="09130917151"></span>
-                            <span class="visible-xs"> <span class="text-muted">09130917151</span><br/></span>
-                            <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="user4@example.com"></span>
-                            <span class="visible-xs"> <span class="text-muted">user4@example.com</span><br/></span>
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
+                    <?php
+                    foreach ($users as $user) {
+                        echo $user->make_a_list_item();
+                    }
+                    ?>
                 </ul>
             </div>
         </div>

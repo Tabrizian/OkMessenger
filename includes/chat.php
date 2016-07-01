@@ -8,7 +8,11 @@
  */
 class Chat
 {
+    public static $fields = ['_id', 'unknown', 'messages', 'users'];
+    public static $collection_name = 'chats';
+
     public $_id;
     public $unknown;
-    public $message_id;
+    public $messages;
+    public $users;
 }

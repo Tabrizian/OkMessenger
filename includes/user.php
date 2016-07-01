@@ -34,6 +34,27 @@ class User extends DatabaseObject
     public function full_name() {
         return $this->first_name . " " . $this->last_name;
     }
+
+    public function make_a_list_item() {
+        $string = " <li class=\"list-group-item\">
+                        <div class=\"col-xs-12 col-sm-3\">
+                            <img src=\"{$this->image}\" alt=\"{$this->full_name()}\" class=\"img-responsive img-circle\" />
+                        </div>
+                        <div class=\"col-xs-12 col-sm-9\">
+
+                            <span class=\"name\">{$this->full_name()}</span><br/>
+                            <span class=\"glyphicon glyphicon-map-marker text-muted c-info\" data-toggle=\"tooltip\" title=\"{$this->address}\"></span>
+                            <span class=\"visible-xs\"> <span class=\"text-muted\">{$this->address}</span><br/></span>
+                            <span class=\"glyphicon glyphicon-earphone text-muted c-info\" data-toggle=\"tooltip\" title=\"{$this->phone_number}\"></span>
+                            <span class=\"visible-xs\"> <span class=\"text-muted\">$this->phone_number</span><br/></span>
+                            <span class=\"fa fa-comments text-muted c-info\" data-toggle=\"tooltip\" title=\"{$this->email_address}\"></span>
+                            <span class=\"visible-xs\"> <span class=\"text-muted\">{$this->email_address}</span><br/></span>
+
+                        </div>
+                        <div class=\"clearfix\"></div>
+                    </li>";
+        return $string;
+    }
 }
 
 ?>
