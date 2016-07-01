@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
             <!-- left column -->
             <div class="col-md-4 col-sm-6 col-xs-10">
                 <div class="text-center">
-                    <img src="<?php $user->image; ?>" class="img-circle img-responsive  col-lg-11"
+                    <img src="<?php echo $user->image; ?>" class="img-circle img-responsive  col-lg-11"
                          class="avatar img-circle img-thumbnail" alt="avatar">
 
                     <h5>Upload a different photo...</h5>
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
                     <form action="upload_photo.php" enctype="multipart/form-data" method="post">
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
                         <input type="file" name="photo" class="text-center center-block well well-sm">
-                        <button type="submit" name="submit"/>
+                        <button type="submit" value="Change photo" name="submit">Change Photo</button>
                     </form>
                 </div>
             </div>

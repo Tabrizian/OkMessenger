@@ -55,6 +55,15 @@ class User extends DatabaseObject
                     </li></a>";
         return $string;
     }
+
+    public function make_a_user_item() {
+        $string = "<li><a href=\"load_profile.php?id=$this->_id\">
+                        <img src=\"$this->image\" width='70' height='70' alt=\"\"/>
+                        <span class=\"name\">{$this->full_name()}</span>
+                    </a></li>";
+        
+        return $string;
+    }
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php require_once('../includes/initialize.php'); ?>
 <?php if (!$session->is_logged_in()) redirect_to("login.php");?>
 <?php
-$user = User::find_by_id($session->user_id);
+$user = User::find_by_id($_GET['id']);
 
 ?>
 <?php include_layout_template('profile-header.php'); ?>
