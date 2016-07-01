@@ -1,5 +1,5 @@
 <?php require_once('../includes/initialize.php'); ?>
-<?php if ($session->is_logged_in()) redirect_to("index.php");?>
+<?php if ($session->is_logged_in()) redirect_to("search.php");?>
 <?php
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
 
     if($found_user) {
         $session->login($found_user);
-        redirect_to("chat.php");
+        redirect_to("search.php");
     }
 }
 ?>

@@ -4,6 +4,9 @@ if (!$session->is_logged_in()) redirect_to("login.php");
 $messages = array();
 $group = null;
 $chat = null;
+$number = 10;
+if(isset($_GET['number']))
+    $number = $_GET['number'];
 if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
 
@@ -101,9 +104,9 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="profile.php">profile</a></li>
-                    <li><a href="#">more message</a></li>
-                    <li><a href="search.php">contact search</a></li>
-                    <li><a href="#">refresh</a></li>
+                    <li><a href="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}&" ?>">More message</a></li>
+                    <li><a href="search.php">Contact Search</a></li>
+                    <li><a href="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}" ?>">Refresh</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
