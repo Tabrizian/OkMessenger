@@ -39,10 +39,15 @@ class User extends DatabaseObject
 
         $string = "<a href=\"chat.php?room_type=c&id={$this->_id}\"><li class=\"list-group-item\">
                         <div class=\"col-xs-12 col-sm-3\">
+                        <div class='row'>
                             <img src=\"{$this->image}\" alt=\"{$this->full_name()}\" class=\"img-responsive img-circle\" />
+                            <div class=\"checkbox\">
+                                       <label><input type=\"checkbox\" value=\"\">check </label>
+                              </div>
+                         </div>
                         </div>
                         <div class=\"col-xs-12 col-sm-9\">
-
+                             
                             <span class=\"name\">{$this->full_name()}</span><br/>
                            
                         </div>
