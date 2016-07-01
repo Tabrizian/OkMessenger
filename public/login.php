@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
 
     if($found_user) {
         $session->login($found_user);
-        redirect_to("index.php");
+        redirect_to("chat.php");
     }
 }
 ?>
