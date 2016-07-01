@@ -5,8 +5,10 @@ $messages = array();
 $group = null;
 $chat = null;
 $number = 10;
+
 if(isset($_GET['number']))
     $number = $_GET['number'];
+$tmp_number = $number + 10;
 if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
 
@@ -55,10 +57,12 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
 if (isset($_GET['id']) && isset($_GET['room_type'])) {
     if ($_GET['room_type'] == 'g') {
         if ($group->messages)
-            $messages = Message::find_all_ids($group->messages);
+            $messages = Message::find_all_ids_limited($group->messages, $number);
     } else if ($_GET['room_type'] == 'c') {
-        if ($chat->messages)
-            $messages = Message::find_all_ids($chat->messages);
+        if ($chat->messages) {
+            $messages = Message::find_all_ids_limited($chat->messages, $number);
+            log_action(count($chat->messages));
+        }
     }
 }
 
@@ -104,9 +108,9 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="profile.php">profile</a></li>
-                    <li><a href="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}&" ?>">More message</a></li>
+                    <li><a href="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}&number={$tmp_number}" ?>">More message</a></li>
                     <li><a href="search.php">Contact Search</a></li>
-                    <li><a href="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}" ?>">Refresh</a></li>
+                    <li><a href="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}&number={$number}" ?>">Refresh</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -203,7 +207,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <form class="navbar-form"
-                                      action="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}" ?>"
+                                      action="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}&number={$number}" ?>"
                                       method="post">
 
                                     <input id="message_text" type="text" name="message" class="span9" required autofocus

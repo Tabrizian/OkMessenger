@@ -26,6 +26,18 @@ class Message extends DatabaseObject
         $query = ['_id' => $in_this_range];
         return self::find_by_sql($query);
     }
+
+    public static function find_all_ids_limited($ids = array(), $limit){
+        if(count($ids) >= $limit) {
+            
+            rsort($ids);
+            $count = count($ids);
+            for ($i = $limit; $i < $count; $i++)
+                unset($ids[$i]);
+        }
+
+        return self::find_all_ids($ids);
+    }
 }
 
 ?>
