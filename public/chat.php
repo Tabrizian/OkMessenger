@@ -3,28 +3,60 @@ require_once('../includes/initialize.php');
 if (!$session->is_logged_in()) redirect_to("login.php");
 $messages = array();
 $group = null;
+$chat = null;
 if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
-    $group = Group::find_by_id($_GET['id']);
-    log_action($group->name);
-    if($_GET['room_type'] == 'g' && isset($_POST['send'])) {
-        $message = new Message();
-        $message->is_private = false;
-        $message->destruction_time = -1;
-        $message->from_user_id = $session->user_id;
-        $message->text = $_POST['message'];
 
-        $message->insert();
+    if ($_GET['room_type'] == 'g') {
+        $group = Group::find_by_id($_GET['id']);
+        if (isset($_POST['send'])) {
+            $message = new Message();
+            $message->is_private = false;
+            $message->destruction_time = -1;
+            $message->from_user_id = $session->user_id;
+            $message->text = $_POST['message'];
+
+            $message->insert();
 
 
-        $group->messages[] = $message->_id;
-        $group->update();
+            $group->messages[] = $message->_id;
+            $group->update();
+        }
+    } else if ($_GET['room_type'] == 'c') {
+        $chat = Chat::find_by_participants($session->user_id, $_GET['id']);
+        if (!$chat) {
+            $chat = new Chat();
+            $chat->users = [$session->user_id, $_GET['id']];
+            $chat->unknown = false;
+
+            $chat->insert();
+        }
+
+        if (isset($_POST['send'])) {
+            $message = new Message();
+            $message->is_private = false;
+            $message->destruction_time = -1;
+            $message->from_user_id = $session->user_id;
+            $message->text = $_POST['message'];
+
+            $message->insert();
+
+
+            $chat->messages[] = $message->_id;
+            $chat->update();
+        }
     }
 
 
 }
-if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
-    $messages = Message::find_all_ids($group->messages);
+if (isset($_GET['id']) && isset($_GET['room_type'])) {
+    if ($_GET['room_type'] == 'g') {
+        if ($group->messages)
+            $messages = Message::find_all_ids($group->messages);
+    } else if ($_GET['room_type'] == 'c') {
+        if ($chat->messages)
+            $messages = Message::find_all_ids($chat->messages);
+    }
 }
 
 ?>
@@ -34,7 +66,8 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
 <head>
     <meta charset="UTF-8">
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
+          type='text/css'>
     <script src="js/jquery-2.2.3.js"></script>
     <script src="js/chat.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -51,13 +84,15 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse-3">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img alt="User Pic" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Ok-blue.png" class="img-circle img-responsive" width="40px" style="margin-top: 5px">
+                <img alt="User Pic" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Ok-blue.png"
+                     class="img-circle img-responsive" width="40px" style="margin-top: 5px">
 
 
             </div>
@@ -80,15 +115,18 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
                         </ul>
                     </li>
                     <li>
-                        <a class="btn btn-default btn-outline btn-circle"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">text search</a>
+                        <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse3"
+                           aria-expanded="false" aria-controls="nav-collapse3">text search</a>
                     </li>
                 </ul>
                 <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <input type="text" style="width: 880px" class="form-control pull-left" placeholder="Search" />
+                            <input type="text" style="width: 880px" class="form-control pull-left"
+                                   placeholder="Search"/>
                         </div>
-                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"
+                                                                            aria-hidden="true"></span></button>
                     </form>
                 </div>
             </div><!-- /.navbar-collapse -->
@@ -99,14 +137,7 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
 </div><!-- /.container-fluid -->
 
 
-
-
-
-
-
-
 <div class="wrapper">
-
 
 
     <div class="container" id="cont1">
@@ -115,14 +146,14 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
         <div class="left">
             <ul class="people">
                 <li class="person" data-chat="person1">
-                    <a><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt="" />
+                    <a><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt=""/>
                         <span class="name">friend 1</span>
                         <span class="preview">last message</span>
                     </a>
                 </li>
                 <li class="person" data-chat="person2">
                     <a>
-                        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt="" />
+                        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt=""/>
                         <span class="name">friend2</span>
                         <span class="preview">last massage</span>
                     </a>
@@ -144,7 +175,8 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
                             <div class="tab-pane active" id="MainRoom">
                                 <div class="row-fluid">
                                     <div class="span12 well">
-                                        <div id="room_messages" style="min-height:260px; max-height:260px; overflow:auto;">
+                                        <div id="room_messages"
+                                             style="min-height:260px; max-height:260px; overflow:auto;">
                                             <!-- Message -->
                                             <?php
                                             foreach ($messages as $message_instance) {
@@ -168,17 +200,22 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
                     <div class="span12">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <form class="navbar-form" action="chat.php" method="post">
+                                <form class="navbar-form"
+                                      action="<?php echo "chat.php?room_type={$_GET['room_type']}&id={$_GET['id']}" ?>"
+                                      method="post">
 
-                                    <input id="message_text" type="text" name="message" class="span9" required autofocus style="width:100%;padding-top: 20px ;margin-top: -45%;margin-bottom:0% ;margin-left: -2%">
-                                    <button id="b_send_message" type="submit" name="send" class="btn btn-primary ">Send</button>
+                                    <input id="message_text" type="text" name="message" class="span9" required autofocus
+                                           style="width:100%;padding-top: 20px ;margin-top: -45%;margin-bottom:0% ;margin-left: -2%">
+                                    <button id="b_send_message" type="submit" name="send" class="btn btn-primary ">
+                                        Send
+                                    </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div>  
+            </div>
 
 
         </div>
