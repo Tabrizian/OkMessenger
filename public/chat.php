@@ -150,6 +150,16 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
 
         <div class="left">
+            <div class="top">
+                <div class="search">
+                    <div class="row">
+                        <button id="b_send_message" type="submit" name="send" class="btn btn-primary ">
+                            <i class="glyphicon glyphicon-plus"></i>add to group
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <ul class="people">
                 <li class="person" data-chat="person1">
                     <a><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt=""/>
