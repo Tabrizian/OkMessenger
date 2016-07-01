@@ -36,7 +36,8 @@ class User extends DatabaseObject
     }
 
     public function make_a_list_item() {
-        $string = " <li class=\"list-group-item\">
+
+        $string = "<a href=\"chat.php?room_type=c&id={$this->_id}\"><li class=\"list-group-item\">
                         <div class=\"col-xs-12 col-sm-3\">
                             <img src=\"{$this->image}\" alt=\"{$this->full_name()}\" class=\"img-responsive img-circle\" />
                         </div>
@@ -52,7 +53,7 @@ class User extends DatabaseObject
 
                         </div>
                         <div class=\"clearfix\"></div>
-                    </li>";
+                    </li></a>";
         return $string;
     }
 }
