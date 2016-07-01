@@ -173,9 +173,9 @@ if (isset($_POST['new_group'])) {
                                     <div id="icon-login-msg1" class="glyphicon glyphicon-chevron-right"></div>
                                     <span id="text-login-msg1">specify channel info</span>
                                 </div>
-                                <input id="login_username1" class="form-control" type="text" placeholder="Channel Name "
+                                <input id="channel_name"  class="form-control" type="text" placeholder="Channel Name "
                                        required>
-                                <input id="login_password1" class="form-control" type="text"
+                                <input id="channel_description"  class="form-control" type="text"
                                        placeholder="Channel Description" required>
 
                             </div>

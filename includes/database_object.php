@@ -89,16 +89,16 @@ class DatabaseObject implements JsonSerializable{
         global $database;
 
         $collection = static::$collection_name;
-        $query = ["_id" => $this->_id];
-        $attributes = $this->attributes();
+        $query = ["_id" => new MongoId($this->_id)];
+        $attributes = $this->attributes();  
         unset($attributes['_id']);
-        $database->$collection->findAndModify($query, $attributes);
+        return $database->$collection->findAndModify($query, $attributes);
     }
 
     public function delete() {
         global $database;
 
-        $query = ["_id" => $this->_id];
+        $query = ["_id" => new MongoId($this->_id)];
         $collection = static::$collection_name;
 
         $status = $database->$collection->remove($query, array("justOne" => true));
