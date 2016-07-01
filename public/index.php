@@ -7,7 +7,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
     if ($_GET['room_type'] == 'g') {
         $group = Group::find_by_id($_GET['id']);
-        if (!($session->user_id in $group->members)) {
+        if (!(in_array($session->user_id,  $group->members))) {
             redirect_to("profile.php");
 
         }

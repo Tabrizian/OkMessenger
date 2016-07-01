@@ -168,7 +168,7 @@ if (isset($_GET['id']) && isset($_GET['room_type']) && isset($group)) {
                     <div class="span12">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <form class="navbar-form" action="index.php" method="post">
+                                <form class="navbar-form" action="chat.php" method="post">
 
                                     <input id="message_text" type="text" name="message" class="span9" required autofocus style="width:100%;padding-top: 20px ;margin-top: -45%;margin-bottom:0% ;margin-left: -2%">
                                     <button id="b_send_message" type="submit" name="send" class="btn btn-primary ">Send</button>
