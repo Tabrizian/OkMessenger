@@ -103,7 +103,7 @@ if(isset($_POST['submit'])) {
                 <div class="form-group">
                     <label class="col-md-3 control-label">Password:</label>
                     <div class="col-md-8">
-                        <input class="form-control" name="password" value="" type="password">
+                        <input class="form-control" name="password" value="" type="password" required>
                     </div>
                 </div>
                 <div class="form-group">

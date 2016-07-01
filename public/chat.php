@@ -69,7 +69,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
           type='text/css'>
     <script src="js/jquery-2.2.3.js"></script>
-    <script src="js/chat.js"></script>
+    <!--<script src="js/chat.js"></script>-->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/okmessenger/chat.css">
@@ -100,18 +100,17 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">profile</a></li>
+                    <li><a href="profile.php">profile</a></li>
                     <li><a href="#">more message</a></li>
-                    <li><a href="#">contact search</a></li>
+                    <li><a href="search.php">contact search</a></li>
                     <li><a href="#">refresh</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">load profile</a></li>
+                            <li><a href="load_profile.php">load profile</a></li>
                             <li><a href="#">report</a></li>
                             <li><a href="#">private chat</a></li>
                             <li><a href="#">unfriend</a></li>
-                            <li><a href="#">send Unknown message</a></li>
                         </ul>
                     </li>
                     <li>
@@ -162,7 +161,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
         </div>
 
         <div class="right">
-            <div class="top"><span>To: <span class="name">friend 2</span></span></div>
+
 
             <div style="padding-left: 1px ; width: 500px">
 
@@ -209,6 +208,9 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
                                     <button id="b_send_message" type="submit" name="send" class="btn btn-primary ">
                                         Send
                                     </button>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="">send unknown </label>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -222,7 +224,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
     </div>
 </div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="js/chat.js"></script>
+
 <script src="js/jquery-2.2.3.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.1.min.js"><\/script>')</script>
 <script src="js/vendor/bootstrap.min.js"></script>
