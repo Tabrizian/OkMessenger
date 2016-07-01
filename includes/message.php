@@ -29,9 +29,10 @@ class Message extends DatabaseObject
 
     public static function find_all_ids_limited($ids = array(), $limit){
         if(count($ids) >= $limit) {
+            
             rsort($ids);
-
-            for ($i = $limit; $i < count($ids); $i++)
+            $count = count($ids);
+            for ($i = $limit; $i < $count; $i++)
                 unset($ids[$i]);
         }
 
