@@ -5,9 +5,15 @@ $messages = array();
 $group = null;
 if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
-    $group = Group::find_by_id($_GET['id']);
+    if ($_GET['room_type'] == 'g') {
+        $group = Group::find_by_id($_GET['id']);
+        if (!($session->user_id in $group->members)) {
+            redirect_to("profile.php");
+
+        }
+    }
     log_action($group->name);
-    if($_GET['room_type'] == 'g' && isset($_POST['send'])) {
+    if ($_GET['room_type'] == 'g' && isset($_POST['send'])) {
         $message = new Message();
         $message->is_private = false;
         $message->destruction_time = -1;
@@ -15,8 +21,8 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
         $message->text = $_POST['message'];
 
         $message->insert();
-        
-        
+
+
         $group->messages[] = $message->_id;
         $group->update();
     }

@@ -7,8 +7,10 @@
 
         <title>OkMessenger Login</title>
 
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="css/okmessenger/login.css" rel="stylesheet"/>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/okmessenger/login.css" rel="stylesheet" />
+        <link href="css/sticky-footer.css" />
+
     </head>
     <body>
 
