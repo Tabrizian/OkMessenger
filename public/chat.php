@@ -222,6 +222,10 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
                                     <div class="checkbox">
                                         <label><input type="checkbox" value="">send unknown </label>
                                     </div>
+
+                                        <label><input class="form-control" name="destruction time"  type="time" style="width: 50px"  />destruction time</label>
+
+
                                 </form>
                             </div>
                         </div>
