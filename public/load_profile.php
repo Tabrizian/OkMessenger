@@ -28,7 +28,7 @@ $user = User::find_by_id($_GET['id']);
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="report.php?id=<?php echo $user->_id;?>">Report</a></li>
-                    <li><a href="chat.php?id=<?php echo $user->_id;?>&room_type=c&private">Private Chat</a></li>
+                    <li><a href="chat.php?id=<?php echo $user->_id;?>&room_type=c&privates">Private Chat</a></li>
                     <li><a href="unfriend.php?id=<?php echo $user->_id; ?>">Unfriend</a></li>
                 </ul>
 
