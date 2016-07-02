@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
     $user->username = $_POST['username'];
     $user->password = $_POST['password'];
     $user->sex = $_POST['sex'];
+    $user->reported_no = 0;
 
     
     

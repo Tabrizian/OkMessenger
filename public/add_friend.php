@@ -14,4 +14,4 @@ if(!in_array($user->_id, $current_user->friends)) {
     log_action("Friend added");
 }
 
-redirect_to("profile.php");
+redirect_to("list.php");
