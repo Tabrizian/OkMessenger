@@ -6,6 +6,40 @@ $user = User::find_by_id($_GET['id']);
 ?>
 <?php include_layout_template('profile-header.php'); ?>
 
+<link rel="stylesheet" href="css/okmessenger/nav.css">
+<div class="container-fluid">
+
+    <!-- Second navbar for search -->
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse-3">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img alt="User Pic" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Ok-blue.png"
+                     class="img-circle img-responsive" width="40px" style="margin-top: 5px">
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">report</a></li>
+                    <li><a href="#">private chat</a></li>
+                    <li><a href="#">unfriend</a></li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+
+</div><!-- /.container-fluid -->
+
+
 <div class="row">
 
     <div
