@@ -3,6 +3,7 @@
 if(!$session->is_logged_in()) redirect_to("login.php");
 $user = User::find_by_id($session->user_id);
 $friends = $user->friends;
+$groups = Group::find_all_user_id($user->_id);
 ?>
 <?php include_layout_template('search-header.php'); ?>
 
@@ -37,6 +38,10 @@ $friends = $user->friends;
                         foreach($friends as $user_id) {
                             $friend = User::find_by_id($user_id);
                             echo $friend->make_a_list_item();
+                        }
+                    if($groups)
+                        foreach ($groups as $group) {
+                            echo $group->make_a_list_item();
                         }
                     ?>
                 </ul>

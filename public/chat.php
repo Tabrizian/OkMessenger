@@ -15,6 +15,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
     if ($_GET['room_type'] == 'g') {
         $group = Group::find_by_id($_GET['id']);
+        $members = $group->members;
         if (isset($_POST['send'])) {
             $message = new Message();
             $message->is_private = false;
@@ -23,7 +24,8 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
             $message->text = $_POST['message'];
 
             $message->insert();
-            $members = $group->members;
+
+
 
             $group->messages[] = $message->_id;
             $group->update();
