@@ -41,9 +41,7 @@ class User extends DatabaseObject
                         <div class=\"col-xs-12 col-sm-3\">
                         <div class='row'>
                             <img src=\"{$this->image}\" alt=\"{$this->full_name()}\" class=\"img-responsive img-circle\" />
-                            <div class=\"checkbox\">
-                                       <label><input type=\"checkbox\" value=\"\">check </label>
-                              </div>
+                            <a href='add_friend.php?id=$this->_id'>Add friend</a>
                          </div>
                         </div>
                         <div class=\"col-xs-12 col-sm-9\">
