@@ -36,7 +36,7 @@ function attach_file($file)
         $errors[] = "No file was uploaded.";
         return false;
     } elseif ($file['error'] != 0) {
-        $errors[] = $this->upload_errors[$file['error']];
+        $errors[] = upload_errors[$file['error']];
         return false;
     } else {
         $temp_path = $file['tmp_name'];
