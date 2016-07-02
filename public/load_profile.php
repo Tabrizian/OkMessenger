@@ -1,5 +1,5 @@
 <?php require_once('../includes/initialize.php'); ?>
-<?php if (!$session->is_logged_in()) redirect_to("login.php");?>
+<?php if (!$session->is_logged_in()) redirect_to("login.php"); ?>
 <?php
 $user = User::find_by_id($_GET['id']);
 
@@ -27,8 +27,8 @@ $user = User::find_by_id($_GET['id']);
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="report.php?id=<?php echo $user->_id;?>">Report</a></li>
-                    <li><a href="chat.php?id=<?php echo $user->_id;?>&room_type=c&privates">Private Chat</a></li>
+                    <li><a href="report.php?id=<?php echo $user->_id; ?>">Report</a></li>
+                    <li><a href="chat.php?id=<?php echo $user->_id; ?>&room_type=c&privates">Private Chat</a></li>
                     <li><a href="unfriend.php?id=<?php echo $user->_id; ?>">Unfriend</a></li>
                 </ul>
 
@@ -80,18 +80,30 @@ $user = User::find_by_id($_GET['id']);
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td><a href="<?php echo $user->email_address; ?>"><?php echo $user->email_address; ?></a></td>
+                                <td>
+                                    <a href="<?php echo $user->email_address; ?>"><?php echo $user->email_address; ?></a>
+                                </td>
                             </tr>
-                            <td>Phone Number</td>
-                            <td><?php echo $user->phone_number; ?></td>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td><?php echo $user->phone_number; ?></td>
 
                             </tr>
 
+                            <tr>
+                                <td>Biography</td>
+                                <td><?php echo $user->bio; ?></td>
                             </tr>
-                            <td>Biography</td>
-                            <td><?php echo $user->bio; ?>
-                            </td>
-
+                            <tr>
+                                <td>Reported</td>
+                                <td>
+                                    <?php
+                                    if ($user->reported_no > 10)
+                                        echo "Reported";
+                                    else
+                                        echo "Not Reported";
+                                    ?>
+                                </td>
                             </tr>
 
                             </tbody>
