@@ -157,7 +157,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
                 <div class="search">
                     <div class="row">
                         <button id="b_send_message" type="submit" name="send" class="btn btn-primary ">
-                            <i class="glyphicon glyphicon-plus"></i>add to group
+                            <i class="glyphicon glyphicon-plus"></i> <a href="add_to_group.php?id=<?php echo $_GET['id'] ?>"> Add to group</a>
                         </button>
                     </div>
                 </div>

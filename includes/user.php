@@ -55,6 +55,25 @@ class User extends DatabaseObject
                     </li></a>";
         return $string;
     }
+    
+    public function make_a_add_to_group_list_item($group_id) {
+        $string = "<a href=\"load_profile.php?id={$this->_id}\"><li class=\"list-group-item\">
+                        <div class=\"col-xs-12 col-sm-3\">
+                            <img src=\"{$this->image}\" alt=\"{$this->full_name()}\" class=\"img-responsive img-circle\" />
+
+                            <a href='add_to_group.php?user_id={$this->_id}&id={$group_id}'>Add to group</a>
+                         </div>
+
+                    
+                        <div class=\"col-xs-12 col-sm-9\">
+                             
+                            <span class=\"name\">{$this->full_name()}</span><br/>
+                           
+                        </div>
+                        <div class=\"clearfix\"></div>
+                    </li></a>";
+        return $string;
+    }
 
     public function make_a_user_item() {
         $string = "<li><a href=\"load_profile.php?id=$this->_id\">
