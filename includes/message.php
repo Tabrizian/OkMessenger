@@ -6,12 +6,12 @@ class Message extends DatabaseObject
 {
 
     protected static $collection_name = "messages";
-    protected static $fields = array('_id', 'from_user_id', 'text', 'is_private', 'destruction_time');
+    protected static $fields = array('_id', 'from_user_id', 'text', 'is_private', 'expireAt');
 
     public $_id;
     public $text;
     public $is_private;
-    public $destruction_time;
+    public $expireAt;
     public $from_user_id;
 
     public function output_message()

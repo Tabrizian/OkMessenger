@@ -1,7 +1,7 @@
 <?php require_once('../includes/initialize.php'); ?>
 <?php if (!$session->is_logged_in()) redirect_to("login.php");?>
 <?php
-$user = User::find_by_id($session->user_id);
+$user = User::find_by_id($_GET['id']);
 
 ?>
 <?php include_layout_template('profile-header.php'); ?>
@@ -53,7 +53,7 @@ $user = User::find_by_id($session->user_id);
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-3 col-lg-3 " align="center"><img alt="User Pic"
-                                                                        src="https://avatars1.githubusercontent.com/u/10105175?v=3&s=400"
+                                                                        src="<?php echo $user->image; ?>"
                                                                         class="img-circle img-responsive"></div>
 
                     <div class=" col-md-9 col-lg-9 ">

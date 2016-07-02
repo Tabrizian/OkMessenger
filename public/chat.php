@@ -5,6 +5,7 @@ $messages = array();
 $group = null;
 $chat = null;
 $number = 10;
+$members = null;
 
 if(isset($_GET['number']))
     $number = $_GET['number'];
@@ -17,12 +18,12 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
         if (isset($_POST['send'])) {
             $message = new Message();
             $message->is_private = false;
-            $message->destruction_time = -1;
+//            $message->destruction_time = -1;
             $message->from_user_id = $session->user_id;
             $message->text = $_POST['message'];
 
             $message->insert();
-
+            $members = $group->members;
 
             $group->messages[] = $message->_id;
             $group->update();
@@ -36,11 +37,11 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
 
             $chat->insert();
         }
-
+        $members = $chat->users;
         if (isset($_POST['send'])) {
             $message = new Message();
             $message->is_private = false;
-            $message->destruction_time = -1;
+//            $message->expireAt = ;
             $message->from_user_id = $session->user_id;
             $message->text = $_POST['message'];
 
@@ -114,7 +115,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="load_profile.php">load profile</a></li>
+                            <li><a href="profile.php">Load Profile</a></li>
                             <li><a href="#">report</a></li>
                             <li><a href="#">private chat</a></li>
                             <li><a href="#">unfriend</a></li>
@@ -161,19 +162,12 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
             </div>
 
             <ul class="people">
-                <li class="person" data-chat="person1">
-                    <a><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt=""/>
-                        <span class="name">friend 1</span>
-                        <span class="preview">last message</span>
-                    </a>
-                </li>
-                <li class="person" data-chat="person2">
-                    <a>
-                        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt=""/>
-                        <span class="name">friend2</span>
-                        <span class="preview">last massage</span>
-                    </a>
-                </li>
+                <?php
+                foreach ($members as $user) {
+                    $found_user = User::find_by_id($user);
+                    echo $found_user->make_a_user_item();
+                }
+                ?>
             </ul>
         </div>
 

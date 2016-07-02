@@ -40,9 +40,14 @@ class User extends DatabaseObject
         $string = "<a href=\"chat.php?room_type=c&id={$this->_id}\"><li class=\"list-group-item\">
                         <div class=\"col-xs-12 col-sm-3\">
                             <img src=\"{$this->image}\" alt=\"{$this->full_name()}\" class=\"img-responsive img-circle\" />
+
                             <div class=\"checkbox\">
                                        <label><input type=\"checkbox\" value=\"\">send unknown </label>
                               </div>
+
+                            <a href='add_friend.php?id=$this->_id'>Add friend</a>
+                         </div>
+
                         </div>
                         <div class=\"col-xs-12 col-sm-9\">
                              
@@ -51,6 +56,15 @@ class User extends DatabaseObject
                         </div>
                         <div class=\"clearfix\"></div>
                     </li></a>";
+        return $string;
+    }
+
+    public function make_a_user_item() {
+        $string = "<li><a href=\"load_profile.php?id=$this->_id\">
+                        <img src=\"$this->image\" width='70' height='70' alt=\"\"/>
+                        <span class=\"name\">{$this->full_name()}</span>
+                    </a></li>";
+        
         return $string;
     }
 }
