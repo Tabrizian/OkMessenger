@@ -115,7 +115,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="profile.php">Load Profile</a></li>
+                            <li><a href="load_profile.php">Load Profile</a></li>
                             <li><a href="#">report</a></li>
                             <li><a href="#">private chat</a></li>
                             <li><a href="#">unfriend</a></li>
@@ -153,11 +153,17 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
         <div class="left">
             <div class="top">
                 <div class="search">
-                    <div class="row">
-                        <button id="b_send_message" type="submit" name="send" class="btn btn-primary ">
-                            <i class="glyphicon glyphicon-plus"></i>add to group
-                        </button>
-                    </div>
+                    <?php
+                    if ($_GET['room_type'] == 'g')
+                    
+                    ?>    
+                        <div class="row" >
+                        <button id = "b_send_message" type = "submit" name = "send" class="btn btn-primary " >
+                            <i class="glyphicon glyphicon-plus" ></i > add to group
+                        </button >
+                    </div >
+                    }
+                    
                 </div>
             </div>
 

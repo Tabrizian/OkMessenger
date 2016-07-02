@@ -3,6 +3,7 @@
 if(!$session->is_logged_in()) redirect_to("login.php");
 $user = User::find_by_id($session->user_id);
 $friends = $user->friends;
+
 ?>
 <?php include_layout_template('search-header.php'); ?>
 
@@ -38,6 +39,7 @@ $friends = $user->friends;
                             $friend = User::find_by_id($user_id);
                             echo $friend->make_a_list_item();
                         }
+                    
                     ?>
                 </ul>
             </div>
