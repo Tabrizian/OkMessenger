@@ -117,7 +117,7 @@ if (isset($_GET['id']) && isset($_GET['room_type'])) {
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="profile.php">Load Profile</a></li>
+                            <li><a href="profile.php">Load My Profile</a></li>
                             <li><a href="#">report</a></li>
                             <li><a href="#">private chat</a></li>
                             <li><a href="#">unfriend</a></li>
