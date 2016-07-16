@@ -55,3 +55,9 @@ fabric.properties
 *~
 
 .idea/
+
+### Laravel
+.env
+.env.example
+vendor
+composer.lock
